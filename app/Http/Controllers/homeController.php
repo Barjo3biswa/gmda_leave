@@ -67,6 +67,8 @@ class homeController extends Controller
 
 
     public function graphData(Request $request){
+
+        $data = $request->day;
         $present_array = [];
         $absent_array = [];
         $leave_array = [];
@@ -76,8 +78,19 @@ class homeController extends Controller
         $total_employee = User::count();
 
         $workingDays = [];
+        ///////////// Check Limit //////////////
+            $first_day = Attendance::orderBy('punch_date','ASC')->first();
+            // dd($first_day);
+            $fromDate = Carbon::parse($first_day->punch_date);
+            $toDate = Carbon::now();
+            $day_count = $fromDate->diffInDays($toDate) + 1;
+            if($day_count < $data){
+                $data = $day_count;
+            }
+        ////////////////////////////////////////
+        // dd($data);
         $currentDate = Carbon::today();
-        while (count($workingDays) < 7) {
+        while (count($workingDays) < $data) {
             $dayOfWeek = $currentDate->dayOfWeek;
             $dayOfMonth = $currentDate->day;
             $isSecondSaturday = ($dayOfWeek === Carbon::SATURDAY && ceil($dayOfMonth / 7) == 2);
@@ -95,7 +108,7 @@ class homeController extends Controller
                 $late = Attendance::where('punch_date',$currentDate->format('Y-m-d'))->whereIn('status',['not_in_time'])->count();
                 $absent = $total_employee - ($present+$leave);
 
-        // Populate the arrays
+                // Populate the arrays
                 $present_array[$formattedDate] = $present;
                 $absent_array[$formattedDate] = $absent;
                 $leave_array[$formattedDate] = $leave;

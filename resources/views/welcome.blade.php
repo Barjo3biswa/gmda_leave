@@ -141,7 +141,15 @@
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-sales-chart">
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+                    <div class="row" style="justify-content: center;display: flex;">
+                        <button class="btn btn-primary" onclick="loadGraph(7)">One Week</button> &nbsp;
+                        <button class="btn btn-primary" onclick="loadGraph(30)">One Month</button> &nbsp;
+                        <button class="btn btn-primary" onclick="loadGraph(365)">One Year</button> &nbsp;
+                        {{-- <button class="btn btn-primary" onclick="loadGraph(365)">All</button> --}}
+                    </div>
                 </div>
+
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="row">
@@ -316,104 +324,115 @@
 </script>
 
 <script>
-        window.onload = function () {
-            $.ajax({
-                url: '{{route('leave.graph-data')}}',
-                type: 'get',
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response);
-                    let presentDataPoints = [];
-                    let absentDataPoints = [];
-                    let leaveDataPoints = [];
-                    let lateDataPoints = [];
 
-                    response.wd.forEach(dateString => {
-                        let date = new Date(dateString);
+function loadGraph(int){
+    ajaxcall(int);
+}
 
-                        presentDataPoints.push({
-                            x: date,
-                            y: response.present[dateString] || 0
-                        });
-                        absentDataPoints.push({
-                            x: date,
-                            y: response.absent[dateString] || 0
-                        });
-                        leaveDataPoints.push({
-                            x: date,
-                            y: response.leave[dateString] || 0
-                        });
-                        lateDataPoints.push({
-                            x: date,
-                            y: response.late[dateString] || 0
-                        });
-                    });
+window.onload = function () {
+    ajaxcall(7);
+};
 
-                    // Create the chart
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        animationEnabled: true,
-                        title: {
-                            text: "Attendance Trends"
-                        },
-                        axisX: {
-                            valueFormatString: "DD MMM"
-                        },
-                        axisY: {
-                            title: "Count",
-                            suffix: ""
-                        },
-                        legend: {
-                            cursor: "pointer",
-                            fontSize: 12,
-                            itemclick: toggleDataSeries
-                        },
-                        toolTip: {
-                            shared: true
-                        },
-                        data: [
-                            {
-                                name: "Present",
-                                type: "spline",
-                                showInLegend: true,
-                                dataPoints: presentDataPoints
-                            },
-                            {
-                                name: "Absent",
-                                type: "spline",
-                                showInLegend: true,
-                                dataPoints: absentDataPoints
-                            },
-                            {
-                                name: "Leave",
-                                type: "spline",
-                                showInLegend: true,
-                                dataPoints: leaveDataPoints
-                            },
-                            {
-                                name: "Latecomer",
-                                type: "spline",
-                                showInLegend: true,
-                                dataPoints: lateDataPoints
-                            }
-                        ]
-                    });
+function ajaxcall(days){
+    $.ajax({
+        url: '{{route('leave.graph-data')}}',
+        type: 'get',
+        dataType: 'json',
+        data: {day:days},
+        success: function(response) {
+            console.log(response);
+            let presentDataPoints = [];
+            let absentDataPoints = [];
+            let leaveDataPoints = [];
+            let lateDataPoints = [];
 
-                    chart.render();
+            response.wd.forEach(dateString => {
+                let date = new Date(dateString);
 
-                    function toggleDataSeries(e) {
-                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                            e.dataSeries.visible = false;
-                        } else {
-                            e.dataSeries.visible = true;
-                        }
-                        chart.render();
-                    }
-                },
-                error: function(response) {
-                    console.log("Error:", response);
-                }
+                presentDataPoints.push({
+                    x: date,
+                    y: response.present[dateString] || 0
+                });
+                absentDataPoints.push({
+                    x: date,
+                    y: response.absent[dateString] || 0
+                });
+                leaveDataPoints.push({
+                    x: date,
+                    y: response.leave[dateString] || 0
+                });
+                lateDataPoints.push({
+                    x: date,
+                    y: response.late[dateString] || 0
+                });
             });
-        };
+
+            // Create the chart
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Attendance Trends"
+                },
+                axisX: {
+                    valueFormatString: "DD MMM Y"
+                },
+                axisY: {
+                    title: "Count",
+                    suffix: ""
+                },
+                legend: {
+                    cursor: "pointer",
+                    fontSize: 12,
+                    itemclick: toggleDataSeries
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [
+                    {
+                        name: "Present",
+                        type: "spline",
+                        showInLegend: true,
+                        dataPoints: presentDataPoints
+                    },
+                    {
+                        name: "Absent",
+                        type: "spline",
+                        showInLegend: true,
+                        dataPoints: absentDataPoints
+                    },
+                    {
+                        name: "Leave",
+                        type: "spline",
+                        showInLegend: true,
+                        dataPoints: leaveDataPoints
+                    },
+                    {
+                        name: "Latecomer",
+                        type: "spline",
+                        showInLegend: true,
+                        dataPoints: lateDataPoints
+                    }
+                ]
+            });
+
+            chart.render();
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
+            }
+        },
+        error: function(response) {
+            console.log("Error:", response);
+        }
+    });
+}
+
 
 </script>
 @section('js')
