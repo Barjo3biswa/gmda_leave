@@ -1,41 +1,30 @@
 @extends('layouts.app')
 @section('content')
-    <div class="breadcome-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="breadcome-list">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="breadcome-heading">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <ul class="breadcome-menu">
-                                    <li><a href="#">Dashboard</a> <span class="bread-slash">/</span>
-                                    </li>
-                                    <li><a href="{{ route('leave.leave-inbox',['type'=>'inbox']) }}">Inbox(Leave)</a> <span
-                                            class="bread-slash">/</span>
-                                    </li>
-                                    <li><span class="bread-blod">Approve(Leave)</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="single-pro-review-area mt-t-30 mg-b-15">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="#">Dashboard</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><a href="{{ route('leave.leave-inbox', ['type' => 'inbox']) }}">Inbox(Leave)</a> <span
+                                        class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">Approve(Leave)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="product-payment-inner-st">
                         <div id="myTabContent" class="tab-content custom-product-edit">
+                            <h4>Leave Inbox</h4>
                             <div class="product-tab-list tab-pane fade active in" id="description">
-
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="review-content-section">
@@ -80,10 +69,7 @@
                                                         <input type="checkbox" disabled
                                                             @if ($applications->is_half_day == 'yes') checked @endif>
                                                         <input type="text" readonly class="form-control"
-                                                        @if ($applications->half_day_on)
-                                                            value="{{ date('d-m-Y', strtotime($applications->half_day_on)) }}"
-                                                        @endif
-                                                            >
+                                                            @if ($applications->half_day_on) value="{{ date('d-m-Y', strtotime($applications->half_day_on)) }}" @endif>
                                                     </div>
                                                 </div>
                                                 @if ($applications->attachments)
@@ -113,9 +99,9 @@
                                         <div class="sparkline8-list">
                                             <div class="sparkline8-hd">
                                                 <div class="main-sparkline8-hd">
-                                                    <h1>Available Leave- <span
+                                                    <h6>Available Leave- <span
                                                             id="leave_showing">{{ $applicant_info->name }}({{ $applicant_info->emp_code }})</span>
-                                                    </h1>
+                                                    </h6>
                                                 </div>
                                             </div>
                                             <div class="sparkline8-graph">
@@ -173,7 +159,8 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label for="name">Applied Leave Duration In Days </label>
-                                                            <input type="text" readonly class="form-control" value="{{\App\Helpers\commonHelper::DaysCountFromBlade($applications->from_date,$applications->to_date,$applications->leave_type_id,$applications->emp_id)}}">
+                                                            <input type="text" readonly class="form-control"
+                                                                value="{{ \App\Helpers\commonHelper::DaysCountFromBlade($applications->from_date, $applications->to_date, $applications->leave_type_id, $applications->emp_id) }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,15 +171,19 @@
                                                         <div class="form-group">
                                                             <label for="name">Change From Date <span
                                                                     style="color: red;">(if required)</span></label>
-                                                            <input type="date" class="form-control" name="updated_from_date" value="{{$applications->from_date}}">
+                                                            <input type="date" class="form-control"
+                                                                name="updated_from_date"
+                                                                value="{{ $applications->from_date }}">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label for="name">Change To Date <span
-                                                                style="color: red;">(if required)</span></label>
-                                                            <input type="date" class="form-control" name="updated_to_date" value="{{$applications->to_date}}">
+                                                                    style="color: red;">(if required)</span></label>
+                                                            <input type="date" class="form-control"
+                                                                name="updated_to_date"
+                                                                value="{{ $applications->to_date }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -240,7 +231,8 @@
                                                     <div class="col-lg-12">
                                                         <div class="payment-adress">
                                                             <button type="submit"
-                                                                class="btn btn-primary waves-effect waves-light">Save</button>
+                                                                class="btn btn-primary waves-effect waves-light btn-xs">Save</button>
+                                                            <br>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,9 +243,9 @@
                                         <div class="sparkline8-list">
                                             <div class="sparkline8-hd">
                                                 <div class="main-sparkline8-hd">
-                                                    <h4>Other Applications ( from
+                                                    <h6>Other Applications ( from
                                                         {{ date('d-m-Y', strtotime($applications->from_date)) }} to
-                                                        {{ date('d-m-Y', strtotime($applications->to_date)) }})</h4>
+                                                        {{ date('d-m-Y', strtotime($applications->to_date)) }})</h6>
                                                 </div>
                                             </div>
                                             <div class="sparkline8-graph">

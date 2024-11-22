@@ -1,7 +1,9 @@
 <nav id="sidebar" class="">
     <div class="sidebar-header">
-        <a href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/"><img class="main-logo" src="{{ asset('img/logo/logo.png')}}" alt="" /></a>
-        <strong><a href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/"><img src="{{ asset('img/logo/logosn.png')}}" alt="" /></a></strong>
+        <a href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/"><img class="main-logo"
+                src="{{ asset('img/logo/gmda-logo.png') }}" alt="" /></a>
+        <strong><a href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/"><img src="{{ asset('img/logo/gmda-logo.png') }}"
+                    alt="" /></a></strong>
     </div>
     <div class="left-custom-menu-adp-wrap comment-scrollbar">
         <nav class="sidebar-nav left-sidebar-menu-pro">
@@ -17,10 +19,15 @@
                     </ul>
                 </li> --}}
                 <li class="active">
-                    <a title="Home" href="{{ env('APP_URL') }}/GMDA/gmda-auth/public/" aria-expanded="false"><span class="educate-icon educate-home icon-wrap"></span></span> <span class="mini-click-non">Home</span></a>
+                    <a title="Home" href="{{ env('APP_URL') }}/GMDA/gmda-auth/public/" aria-expanded="false"><span
+                            class="educate-icon educate-home icon-wrap"></span></span> <span
+                            class="mini-click-non">Home</span></a>
                 </li>
                 <li>
-                    <a title="Leave Module" href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/?token={{ session('jwt_token') }}" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Leave Module</span></a>
+                    <a title="Leave Module"
+                        href="{{ env('APP_URL') }}/GMDA/gmda-leave/public/?token={{ session('jwt_token') }}"
+                        aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"
+                            aria-hidden="true"></span> <span class="mini-click-non">Leave Module</span></a>
                 </li>
             </ul>
         </nav>
