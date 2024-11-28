@@ -108,16 +108,16 @@
                                                             </div>
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                                                                 <div class="form-group">
-                                                                    <label for="name">.</label>
                                                                     <input type="submit" name="button" value="Filter"
-                                                                        class="btn btn-primary btn-xs {{-- waves-effect waves-light --}}">
+                                                                        class="btn btn-primary btn-xs"
+                                                                        style="margin-top: 25px;">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                                                                 <div class="form-group">
-                                                                    <label for="name">.</label>
                                                                     <input type="submit" name="button" value="Process"
-                                                                        class="btn btn-warning btn-xs{{-- waves-effect waves-light --}}">
+                                                                        class="btn btn-warning btn-xs"
+                                                                        style="margin-top: 25px;">
                                                                 </div>
                                                             </div>
                                                         </div>
