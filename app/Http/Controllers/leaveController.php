@@ -78,7 +78,14 @@ class leaveController extends Controller
         $leave_availability = LeaveAvailability::where('emp_id', Auth::user()->id)->get();
         $leave_ids = $leave_availability->pluck('leave_type_id');
         $leave_type = LeaveTypeMaster::whereIn('id', $leave_ids)->get();
-        $my_applications = LeaveApplication::where('emp_id', Auth::user()->id)->whereYear('to_date', now()->year)->orwhereYear('from_date', now()->year)->orderBy('id', 'DESC')->get();
+        $my_applications = LeaveApplication::where('emp_id', Auth::user()->id)
+            ->where(function ($query) {
+                $query->whereYear('to_date', now()->year)
+                    ->orWhereYear('from_date', now()->year);
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
+
         $my_last_application = LeaveApplication::where('emp_id', Auth::user()->id)->where('to_date', '>', Carbon::now()->format('Y-m-d'))->orderBy('id', 'DESC')->first();
         $othher_employee_applications = LeaveApplication::whereNotIn('emp_id', [Auth::user()->id])->where('to_date', '>', Carbon::now()->format('Y-m-d'))->orderBy('id', 'DESC')->get();
         if ($request->expectsJson()) {
@@ -89,8 +96,7 @@ class leaveController extends Controller
                 'leave_type' => $leave_type,
                 'my_applications' => $my_applications,
                 'my_last_application' => $my_last_application,
-                // 'other_employee_applications'=> $othher_employee_applications ,
-                'other_employee_applications' => $my_applications,
+                'other_employee_applications' => $othher_employee_applications,
             ], 200);
         }
         return view('leave.apply', compact('users', 'leave_type', 'leave_availability', 'my_applications', 'my_last_application', 'othher_employee_applications'));
