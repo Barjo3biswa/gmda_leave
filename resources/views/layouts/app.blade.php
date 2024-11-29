@@ -117,7 +117,7 @@
                                                         @endforeach
                                                         <li>
                                                             <a
-                                                                href="{{ env('APP_URL') }}/GMDA/gmda-auth/public/logout-ano">
+                                                                href="{{ env('APP_URL') }}/gmda_auth/public/logout-ano">
                                                                 <span
                                                                     class="edu-icon edu-locked author-log-ic"></span>Log
                                                                 Out
