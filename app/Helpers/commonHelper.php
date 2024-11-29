@@ -32,7 +32,7 @@ class commonHelper
         }
         $user_id = Auth::user()->id;
         $user = User::where('id', $user_id)->first();
-        $extra_permission = json_decode($user->permission_ids);
+        $extra_permission = json_decode($user->permission_ids) ?? [];
         if (in_array($permission_id, $extra_permission)) {
             return true;
         }
