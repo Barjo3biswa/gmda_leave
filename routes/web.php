@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // Route::get('/', function () {
     //     return view('welcome');
     // });
-    Route::get('/', [App\Http\Controllers\homeController::class, 'index'])->name('leave.holyday-index');
+    Route::get('/', [App\Http\Controllers\homeController::class, 'index'])->name('home');
     Route::get('/graph-data', [App\Http\Controllers\homeController::class, 'graphData'])->name('leave.graph-data');
 
     Route::get('/holyday-index', [App\Http\Controllers\holydayController::class, 'holydayIndex'])->name('leave.holyday-index');
