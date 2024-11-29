@@ -34,46 +34,11 @@
         .analytics-sparkle-line .analytics-content .tuition-fees {
             color: #646464;
             font-weight: 400;
-            margin-top: 18px;
         }
 
-        .analytics-content-border .analytics-content {
+        .analytics-content {
             border-right: 1px solid #ddd;
             padding-right: 15px;
-        }
-
-        .analytics-sparkle-area h1,
-        .analytics-sparkle-area h2,
-        .analytics-sparkle-area h3,
-        .analytics-sparkle-area h4,
-        .analytics-sparkle-area h5,
-        .analytics-sparkle-area h6 {
-            margin: 0;
-        }
-
-        .analytics-sparkle-line.margin-bottom h5 {
-            margin-bottom: 4px;
-        }
-
-        .main-sparkline8-hd {
-            color: #fff;
-            background: #0466c8;
-            padding: 6px;
-        }
-
-        .main-sparkline8-hd h6 {
-            margin-bottom: 0;
-            font-weight: 400;
-            line-height: 12px;
-        }
-
-        .product-sales-chart {
-            border: thin solid #d7d7d7;
-            border-radius: 4px;
-        }
-
-        .main-sparkline8-hd {
-            margin-bottom: 10px;
         }
     </style>
 @endsection
@@ -94,7 +59,7 @@
                     </ul>
                 </div>
             </div> --}}
-            {{-- <div class="breadcome-list" style="margin-top:16px;">
+            <div class="breadcome-list" style="margin-top:16px;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="breadcome-heading">
@@ -113,43 +78,35 @@
                         </ul>
                     </div>
                 </div>
-            </div> --}}
-
-
-            <div class="col-md-12 mt-5">
-                {{-- <div class="row">
-                    <div class="analytics-content">
-                        <h4>OVERVIEW</h4>
-                        <h2><span class="tuition-fees"
-                                style="font-size:12px;background: #0466c8;padding: 4px 8px;color: #fff;font-weight: 400;">({{ $date }})
-                                Total Employees
-                                {{ $total_employee }}</span></h2>
-                    </div>
-                </div> --}}
-                @php
-                    $present_percentage = round(($present->count() / $total_employee) * 100, 2);
-                    $leave_percentage = round(($leave->count() / $total_employee) * 100, 0);
-                    $late_percentage = round(($late->count() / $total_employee) * 100, 2);
-                    $absent_percentage = round(($absent / $total_employee) * 100, 2);
-                @endphp
-                <input type="hidden" id="present" name="present" value="{{ $present_percentage }}">
-                <input type="hidden" id="leave" name="leave" value="{{ $leave_percentage }}">
-                <input type="hidden" id="late" name="late" value="{{ $late_percentage }}">
-                <input type="hidden" id="absent" name="absent" value="{{ $absent_percentage }}">
             </div>
 
+
+
+
+
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 analytics-content-border">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="analytics-sparkle-line reso-mg-b-30">
-                        <h6 style="margin-bottom: 8px;"><span class="tuition-fees"
-                                style="font-size: 12px;font-weight: 600;color: #bf4c4c;">OVERVIEW
-                                ({{ $date }})
-                                Total Employees
-                                {{ $total_employee }}</span></h6>
                         <div class="row">
-
-
                             <div class="col-md-3">
+                                <div class="analytics-content">
+                                    <h5>OVERVIEW</h5>
+                                    <h2><span class="tuition-fees">({{ $date }}) <br> Total Employees <br>
+                                            {{ $total_employee }}</span></h2>
+                                </div>
+                            </div>
+                            @php
+                                $present_percentage = round(($present->count() / $total_employee) * 100, 2);
+                                $leave_percentage = round(($leave->count() / $total_employee) * 100, 0);
+                                $late_percentage = round(($late->count() / $total_employee) * 100, 2);
+                                $absent_percentage = round(($absent / $total_employee) * 100, 2);
+                            @endphp
+                            <input type="hidden" id="present" name="present" value="{{ $present_percentage }}">
+                            <input type="hidden" id="leave" name="leave" value="{{ $leave_percentage }}">
+                            <input type="hidden" id="late" name="late" value="{{ $late_percentage }}">
+                            <input type="hidden" id="absent" name="absent" value="{{ $absent_percentage }}">
+
+                            <div class="col-md-2">
                                 <div class="analytics-content">
                                     <h5>Present</h5>
                                     <h2><span class="counter">{{ $present->count() }}</span> <span
@@ -163,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="analytics-content">
                                     <h5>Absent</h5>
                                     <h2><span class="counter">{{ $absent }}</span> <span class="tuition-fees"></span>
@@ -177,7 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="analytics-content">
                                     <h5>Late</h5>
                                     <h2><span class="counter">{{ $late->count() }}</span> <span
@@ -191,7 +148,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="analytics-content">
                                     <h5>On Leave</h5>
                                     <h2><span class="counter">{{ $leave->count() }}</span> <span
@@ -211,39 +168,33 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="analytics-sparkle-line reso-mg-b-30 margin-bottom" style="height: 126px;">
+                            <div class="analytics-sparkle-line reso-mg-b-30" style="height: 126px;">
                                 <div class="analytics-content">
                                     <h5>Prsent Rate</h5>
-                                    <h2><span class="counter">{{ round($presentRate, 0) }}%</span><br><span
-                                            class="tuition-fees">{{ round($presentRate - $last_presentRate, 0) }}% From
-                                            Previous month
-                                        </span>
-
-                                    </h2>
+                                    <h2><span class="counter">{{ round($presentRate, 0) }}%</span> <span
+                                            class="tuition-fees">{{ round($presentRate - $last_presentRate, 0) }}% <br>
+                                            From
+                                            Previous month</span></h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="analytics-sparkle-line reso-mg-b-30 margin-bottom" style="height: 126px;">
+                            <div class="analytics-sparkle-line reso-mg-b-30" style="height: 126px;">
                                 <div class="analytics-content">
                                     <h5>Absence Rate</h5>
-                                    <h2><span class="counter">{{ round($absentRate, 0) }}%</span> <br><span
-                                            class="tuition-fees">{{ round($absentRate - $last_absentRate, 0) }}% From
-                                            Previous month</span>
-
-                                    </h2>
+                                    <h2><span class="counter">{{ round($absentRate, 0) }}%</span> <span
+                                            class="tuition-fees">{{ round($absentRate - $last_absentRate, 0) }}% <br> From
+                                            Previous month</span></h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="analytics-sparkle-line reso-mg-b-30 margin-bottom" style="height: 126px;">
+                            <div class="analytics-sparkle-line reso-mg-b-30" style="height: 126px;">
                                 <div class="analytics-content">
                                     <h5>Latecomer Rate</h5>
-                                    <h2><span class="counter">{{ round($lateRate, 0) }}%</span> <br><span
-                                            class="tuition-fees">{{ round($lateRate - $last_lateRate, 0) }}% From
-                                            Previous month</span>
-
-                                    </h2>
+                                    <h2><span class="counter">{{ round($lateRate, 0) }}%</span> <span
+                                            class="tuition-fees">{{ round($lateRate - $last_lateRate, 0) }}% <br> From
+                                            Previous month</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -295,13 +246,6 @@
                                                         <td>{{ $lv->leaveApplication->to_date }}</td>
                                                     </tr>
                                                 @empty
-                                                    @foreach ($absentees as $ab)
-                                                        <tr>
-                                                            <td>{{ $ab->name }}</td>
-                                                            <td>{{ $ab->emp_code }}</td>
-                                                            <td></td>
-                                                        </tr>
-                                                    @endforeach
                                                     <tr>
                                                         <td colspan="3">
                                                             No record found..
@@ -349,13 +293,6 @@
                                                         <td>{{ $lt->out_time }}</td>
                                                     </tr>
                                                 @empty
-                                                    @foreach ($absentees as $ab)
-                                                        <tr>
-                                                            <td>{{ $ab->name }}</td>
-                                                            <td>{{ $ab->emp_code }}</td>
-                                                            <td></td>
-                                                        </tr>
-                                                    @endforeach
                                                     <tr>
                                                         <td colspan="3">
                                                             No record found..
