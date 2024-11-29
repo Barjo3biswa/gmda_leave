@@ -69,11 +69,11 @@
         }
 
         /* .on_leave {
-                                                            background-color: rgb(210, 193, 233);
-                                                            color: rgb(53, 33, 78);
-                                                            padding: 2px 2px;
-                                                            border-radius: 3px;
-                                                        } */
+                    background-color: rgb(210, 193, 233);
+                    color: rgb(53, 33, 78);
+                    padding: 2px 2px;
+                    border-radius: 3px;
+                } */
         .attendance-cell {
             position: relative;
         }
