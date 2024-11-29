@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/invalidate-token', [App\Http\Controllers\Auth\TokenController::class, 'invalidateToken'])->name('invalidate-token');
 
-Route::group(['middleware' => 'auth.jwt'], function() {
+Route::group(['middleware' => 'auth.jwt'], function () {
     // Route::get('/', function () {
     //     return view('welcome');
     // });
-    Route::get('/', [App\Http\Controllers\homeController::class, 'index'])/* ->name('leave.holyday-index') */;
+    Route::get('/', [App\Http\Controllers\homeController::class, 'index'])->name('leave.holyday-index');
     Route::get('/graph-data', [App\Http\Controllers\homeController::class, 'graphData'])->name('leave.graph-data');
 
     Route::get('/holyday-index', [App\Http\Controllers\holydayController::class, 'holydayIndex'])->name('leave.holyday-index');
